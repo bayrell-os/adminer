@@ -76,6 +76,7 @@ if (extension_loaded('pdo')) {
 				return false;
 			}
 			$row = $result->fetch();
+			if (!$row) return false;
 			return $row[$field];
 		}
 	}

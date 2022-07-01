@@ -579,6 +579,7 @@ if (isset($_GET["sqlite"]) || isset($_GET["sqlite2"])) {
 					$foreign[] = " " . format_foreign_key($foreign_key);
 				}
 			}
+			queries("PRAGMA legacy_alter_table=ON;");
 			queries("BEGIN");
 		}
 		foreach ($fields as $key => $field) {

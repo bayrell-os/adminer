@@ -6,7 +6,7 @@ function adminer_errors($errno, $errstr) {
 error_reporting(6135); // errors and warnings
 set_error_handler('adminer_errors', E_WARNING);
 
-include "../adminer/include/coverage.inc.php";
+include __DIR__ . "/coverage.inc.php";
 
 // disable filter.default
 $filter = !preg_match('~^(unsafe_raw)?$~', ini_get("filter.default"));
@@ -23,11 +23,11 @@ if (function_exists("mb_internal_encoding")) {
 	mb_internal_encoding("8bit");
 }
 
-include "../adminer/include/functions.inc.php";
+include __DIR__ . "/functions.inc.php";
 
 // used only in compiled file
 if (isset($_GET["file"])) {
-	include "../adminer/file.inc.php";
+	include dirname(__DIR__) . "/file.inc.php";
 }
 
 if ($_GET["script"] == "version") {
@@ -72,19 +72,19 @@ if (function_exists("get_magic_quotes_runtime") && get_magic_quotes_runtime()) {
 @ini_set("zend.ze1_compatibility_mode", false); // @ - deprecated
 @ini_set("precision", 15); // @ - can be disabled, 15 - internal PHP precision
 
-include "../adminer/include/lang.inc.php";
-include "../adminer/lang/$LANG.inc.php";
-include "../adminer/include/pdo.inc.php";
-include "../adminer/include/driver.inc.php";
-include "../adminer/drivers/sqlite.inc.php";
-include "../adminer/drivers/pgsql.inc.php";
-include "../adminer/drivers/oracle.inc.php";
-include "../adminer/drivers/mssql.inc.php";
-include "../adminer/drivers/mongo.inc.php";
-include "../adminer/drivers/elastic.inc.php";
-include "./include/adminer.inc.php";
+include __DIR__ . "/lang.inc.php";
+include dirname(__DIR__) . "/lang/$LANG.inc.php";
+include __DIR__ . "/pdo.inc.php";
+include __DIR__ . "/driver.inc.php";
+include dirname(__DIR__) . "/drivers/sqlite.inc.php";
+include dirname(__DIR__) . "/drivers/pgsql.inc.php";
+include dirname(__DIR__) . "/drivers/oracle.inc.php";
+include dirname(__DIR__) . "/drivers/mssql.inc.php";
+include dirname(__DIR__) . "/drivers/mongo.inc.php";
+include dirname(__DIR__) . "/drivers/elastic.inc.php";
+include dirname(__DIR__) . "/include/adminer.inc.php";
 $adminer = (function_exists('adminer_object') ? adminer_object() : new Adminer);
-include "../adminer/drivers/mysql.inc.php"; // must be included as last driver
+include dirname(__DIR__) . "/drivers/mysql.inc.php"; // must be included as last driver
 
 $config = driver_config();
 $possible_drivers = $config['possible_drivers'];
@@ -109,11 +109,11 @@ define("ME", preg_replace('~\?.*~', '', relative_uri()) . '?'
 	. (DB != "" ? 'db=' . urlencode(DB) . '&' . (isset($_GET["ns"]) ? "ns=" . urlencode($_GET["ns"]) . "&" : "") : '')
 );
 
-include "../adminer/include/version.inc.php";
-include "../adminer/include/design.inc.php";
-include "../adminer/include/xxtea.inc.php";
-include "../adminer/include/auth.inc.php";
-include "./include/editing.inc.php";
-include "./include/connect.inc.php";
+include dirname(__DIR__) . "/include/version.inc.php";
+include dirname(__DIR__) . "/include/design.inc.php";
+include dirname(__DIR__) . "/include/xxtea.inc.php";
+include dirname(__DIR__) . "/include/auth.inc.php";
+include dirname(__DIR__) . "/include/editing.inc.php";
+include dirname(__DIR__) . "/include/connect.inc.php";
 
 $on_actions = "RESTRICT|NO ACTION|CASCADE|SET NULL|SET DEFAULT"; ///< @var string used in foreign_keys()
