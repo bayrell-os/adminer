@@ -25,7 +25,10 @@ function select($result, $connection2 = null, $orgtables = array(), $limit = 0) 
 				$name = $field->name;
 				$orgtable = $field->orgtable;
 				$orgname = $field->orgname;
-				$return[$field->table] = $orgtable;
+				if (isset($field->table))
+				{
+					$return[$field->table] = $orgtable;
+				}
 				if ($orgtables && $jush == "sql") { // MySQL EXPLAIN
 					$links[$j] = ($name == "table" ? "table=" : ($name == "possible_keys" ? "indexes=" : null));
 				} elseif ($orgtable != "") {
