@@ -1,2 +1,2 @@
 <?php
-$VERSION = "4.8.2-cloud-os";
+$VERSION = "4.8.2-fix";
