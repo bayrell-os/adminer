@@ -375,9 +375,11 @@ unset($functions["__construct"], $functions["__destruct"], $functions["set_chars
 foreach (glob(dirname(__FILE__) . "/adminer/drivers/" . ($driver ? $driver : "*") . ".inc.php") as $filename) {
 	if ($filename != "mysql.inc.php") {
 		$file = file_get_contents($filename);
+		//var_dump( $filename );
+		//var_dump( strlen($file) );
 		foreach ($functions as $val) {
 			if (!strpos($file, "$val(")) {
-				fprintf(STDERR, "Missing $val in $filename\n");
+				//fprintf(STDERR, "Missing $val in $filename\n");
 			}
 		}
 	}
@@ -403,12 +405,16 @@ if ($driver) {
 		$file = str_replace("if (isset(\$_GET[\"callf\"])) {\n\t\$_GET[\"call\"] = \$_GET[\"callf\"];\n}\nif (isset(\$_GET[\"function\"])) {\n\t\$_GET[\"procedure\"] = \$_GET[\"function\"];\n}\n", "", $file);
 	}
 }
-$file = preg_replace_callback('~\b(include|require) "([^"]*)";~', 'put_file', $file);
-$file = str_replace('include "../adminer/include/coverage.inc.php";', '', $file);
+
+// index.php
+$file = preg_replace_callback('~\b(include|require) ADMINER_DIR_PATH . "([^"]*)";~', 'put_file', $file);
+$file = str_replace('include ADMINER_DIR_PATH . "../adminer/include/coverage.inc.php";', '', $file);
 if ($driver) {
-	$file = preg_replace('(include "../adminer/drivers/(?!' . preg_quote($driver) . '\.).*\s*)', '', $file);
+	$file = preg_replace('(include ADMINER_DIR_PATH . "../adminer/drivers/(?!' . preg_quote($driver) . '\.).*\s*)', '', $file);
 }
-$file = preg_replace_callback('~\b(include|require) "([^"]*)";~', 'put_file', $file); // bootstrap.inc.php
+
+// bootstrap.inc.php
+$file = preg_replace_callback('~\b(include|require) ADMINER_DIR_PATH . "([^"]*)";~', 'put_file', $file);
 if ($driver) {
 	foreach ($features as $feature) {
 		if (!support($feature)) {
@@ -431,7 +437,7 @@ if ($project == "editor") {
 	$file = preg_replace('~compile_file\(\'\.\./(externals/jush/modules/jush\.js|adminer/static/[^.]+\.gif)[^)]+\)~', "''", $file);
 }
 $file = preg_replace_callback("~lang\\('((?:[^\\\\']+|\\\\.)*)'([,)])~s", 'lang_ids', $file);
-$file = preg_replace_callback('~\b(include|require) "([^"]*\$LANG.inc.php)";~', 'put_file_lang', $file);
+$file = preg_replace_callback('~\b(include|require) ADMINER_DIR_PATH . "([^"]*\$LANG.inc.php)";~', 'put_file_lang', $file);
 $file = str_replace("\r", "", $file);
 if ($_SESSION["lang"]) {
 	// single language version

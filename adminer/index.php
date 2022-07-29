@@ -7,8 +7,10 @@
 * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
 */
 
-include "./include/bootstrap.inc.php";
-include "./include/tmpfile.inc.php";
+define("ADMINER_DIR_PATH", __DIR__ . "/");
+
+include ADMINER_DIR_PATH . "./include/bootstrap.inc.php";
+include ADMINER_DIR_PATH . "./include/tmpfile.inc.php";
 
 $enum_length = "'(?:''|[^'\\\\]|\\\\.)*'";
 $inout = "IN|OUT|INOUT";
@@ -24,55 +26,55 @@ if (isset($_GET["function"])) {
 }
 
 if (isset($_GET["download"])) {
-	include "./download.inc.php";
+	include ADMINER_DIR_PATH . "./download.inc.php";
 } elseif (isset($_GET["table"])) {
-	include "./table.inc.php";
+	include ADMINER_DIR_PATH . "./table.inc.php";
 } elseif (isset($_GET["schema"])) {
-	include "./schema.inc.php";
+	include ADMINER_DIR_PATH . "./schema.inc.php";
 } elseif (isset($_GET["dump"])) {
-	include "./dump.inc.php";
+	include ADMINER_DIR_PATH . "./dump.inc.php";
 } elseif (isset($_GET["privileges"])) {
-	include "./privileges.inc.php";
+	include ADMINER_DIR_PATH . "./privileges.inc.php";
 } elseif (isset($_GET["sql"])) {
-	include "./sql.inc.php";
+	include ADMINER_DIR_PATH . "./sql.inc.php";
 } elseif (isset($_GET["edit"])) {
-	include "./edit.inc.php";
+	include ADMINER_DIR_PATH . "./edit.inc.php";
 } elseif (isset($_GET["create"])) {
-	include "./create.inc.php";
+	include ADMINER_DIR_PATH . "./create.inc.php";
 } elseif (isset($_GET["indexes"])) {
-	include "./indexes.inc.php";
+	include ADMINER_DIR_PATH . "./indexes.inc.php";
 } elseif (isset($_GET["database"])) {
-	include "./database.inc.php";
+	include ADMINER_DIR_PATH . "./database.inc.php";
 } elseif (isset($_GET["scheme"])) {
-	include "./scheme.inc.php";
+	include ADMINER_DIR_PATH . "./scheme.inc.php";
 } elseif (isset($_GET["call"])) {
-	include "./call.inc.php";
+	include ADMINER_DIR_PATH . "./call.inc.php";
 } elseif (isset($_GET["foreign"])) {
-	include "./foreign.inc.php";
+	include ADMINER_DIR_PATH . "./foreign.inc.php";
 } elseif (isset($_GET["view"])) {
-	include "./view.inc.php";
+	include ADMINER_DIR_PATH . "./view.inc.php";
 } elseif (isset($_GET["event"])) {
-	include "./event.inc.php";
+	include ADMINER_DIR_PATH . "./event.inc.php";
 } elseif (isset($_GET["procedure"])) {
-	include "./procedure.inc.php";
+	include ADMINER_DIR_PATH . "./procedure.inc.php";
 } elseif (isset($_GET["sequence"])) {
-	include "./sequence.inc.php";
+	include ADMINER_DIR_PATH . "./sequence.inc.php";
 } elseif (isset($_GET["type"])) {
-	include "./type.inc.php";
+	include ADMINER_DIR_PATH . "./type.inc.php";
 } elseif (isset($_GET["trigger"])) {
-	include "./trigger.inc.php";
+	include ADMINER_DIR_PATH . "./trigger.inc.php";
 } elseif (isset($_GET["user"])) {
-	include "./user.inc.php";
+	include ADMINER_DIR_PATH . "./user.inc.php";
 } elseif (isset($_GET["processlist"])) {
-	include "./processlist.inc.php";
+	include ADMINER_DIR_PATH . "./processlist.inc.php";
 } elseif (isset($_GET["select"])) {
-	include "./select.inc.php";
+	include ADMINER_DIR_PATH . "./select.inc.php";
 } elseif (isset($_GET["variables"])) {
-	include "./variables.inc.php";
+	include ADMINER_DIR_PATH . "./variables.inc.php";
 } elseif (isset($_GET["script"])) {
-	include "./script.inc.php";
+	include ADMINER_DIR_PATH . "./script.inc.php";
 } else {
-	include "./db.inc.php";
+	include ADMINER_DIR_PATH . "./db.inc.php";
 }
 
 // each page calls its own page_header(), if the footer should not be called then the page exits
